@@ -1,0 +1,11 @@
+# Exclude local files (data, models, logs, config) 
+/local/datasets/*
+/local/models/*
+/local/logs/*
+/local/ships/*
+/local/unityenv/*
+
+# Generated files
+.idea*
+__pycache__*
+.ipynb_checkpoints*
