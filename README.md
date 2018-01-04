@@ -80,7 +80,7 @@ judging final agent performance.
 ![alt text](docs/images/val_loss_tensorboard.png "Validation Loss")
 
 
-####Architecture
+###Architecture
 
 ![alt text](docs/images/arch_table.png "Top 5 Model Architectures")
 
@@ -103,7 +103,7 @@ nature of deep learning, its hard to give a reason other than _it seems best for
 The interesting result for me is that the number of parameters, or model capacity, did not seem to be important when 
 determining agent performance. In fact, the top pirate actually had the _least_ capacity.
 
-####Dataset
+###Dataset
 
 ![alt text](docs/images/data_table.png "Top 5 Data Parameters")
 
@@ -123,7 +123,7 @@ Every single one of the top 5 models was trained using dataset 3 above. Clean da
 sense, since there will be less examples that push the gradient in the wrong direction. As for why the forward bias 
 matters, my speculation is that pirates that move forward slightly more often get to the treasure slightly quicker.
 
-####Optimization
+###Optimization
 
 ![alt text](docs/images/opt_table.png "Top 5 Optimization Parameters")
 
