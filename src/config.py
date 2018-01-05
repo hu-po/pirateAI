@@ -1,3 +1,7 @@
+from hyperopt import hp
+import logging
+import os
+
 # This file contains all the parameters associated with pirateAI.
 # Many of the classes and files import from this.
 # TODO: Make this a JSON or YAML?
@@ -40,14 +44,10 @@ TRAIN_TEST_SPLIT = 0.9
 INPUT_DEBUG = False  # Blocking plot showing sample training image and histogram
 
 # Logging
-import logging
-
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 logging.basicConfig(level=logging.INFO)
 
 # Directories
-import os
-
 base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 MODEL_DIR = os.path.abspath(os.path.join(base_path, 'local', 'models'))
 LOGS_DIR = os.path.abspath(os.path.join(base_path, 'local', 'logs'))
@@ -56,7 +56,7 @@ SHIP_DIR = os.path.abspath(os.path.join(base_path, 'local', 'ships'))
 
 # Hyperparameter space to explore
 # TODO: For now comment out the larger nets as they are unfair
-from hyperopt import hp
+
 
 SPACE = {'dataset'      : hp.choice('dataset', ['1203_d1.pickle',
                                                 '1203_d2.pickle',
