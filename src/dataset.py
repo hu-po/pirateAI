@@ -9,19 +9,21 @@ import matplotlib.pyplot as plt
 import src.config as config
 
 
-def histogram_of_labels(labels, label_dict=config.LABEL_DICT):
+def histogram_of_labels(labels, label_dict=None):
     """
     Creates and displays a histogram plot for the given labels
     :param labels: [int] labels
     :param label_dict: {} dictionary of possible labels for human readability
     """
+    if label_dict is None:
+        label_dict = config.LABEL_DICT
     plt.hist(labels, bins=len(label_dict), normed=True)
     plt.xticks(range(len(label_dict)), label_dict.values())
     plt.ylabel('% of data')
     plt.show()
 
 
-def plot_images(images, label, pred_label=None, label_dict=config.LABEL_DICT):
+def plot_images(images, label, pred_label=None, label_dict=None):
     """
     Creates and displays a 3x6 plot of sample images with their labels.
     :param images: [ndarray] input image
@@ -29,6 +31,8 @@ def plot_images(images, label, pred_label=None, label_dict=config.LABEL_DICT):
     :param pred_label: [ndarray] predicted label
     :param label_dict: {} dictionary of possible targets for human readability
     """
+    if label_dict is None:
+        label_dict = config.LABEL_DICT
     assert len(images) == len(label), "Dimension mismatch between images and labels given"
     fig, axes = plt.subplots(3, 6, figsize=(12, 5))
     fig.subplots_adjust(hspace=0.3, wspace=0.1)
@@ -67,7 +71,9 @@ class Dataset(object):
     TThe dataset class provides a way to
     """
 
-    def __init__(self, label_dict=config.LABEL_DICT):
+    def __init__(self, label_dict=None):
+        if label_dict is None:
+            label_dict = config.LABEL_DICT
         self.log = logging.getLogger(__name__)
         self.log.info('New dataset, label dictionary: %s' % json.dumps(config.LABEL_DICT))
         self.label_dict = label_dict
@@ -75,13 +81,15 @@ class Dataset(object):
         self.label_list = []
 
     @classmethod
-    def from_datasets(cls, datasets=None, label_dict=config.LABEL_DICT, max_n=None):
+    def from_datasets(cls, datasets=None, label_dict=None, max_n=None):
         """
         Create dataset from list of other datasets
         :param datasets: [Dataset,] list of datasets
         :param max_n: (int) maximum number of datapoints
         :return: (Dataset) Dataset object
         """
+        if label_dict is None:
+            label_dict = config.LABEL_DICT
         assert all([isinstance(d, Dataset) for d in datasets]), "Please provide only datasets"
         d = cls(label_dict)
         d.input_paths, d.label_list = d.combine_datasets(datasets)
@@ -91,13 +99,15 @@ class Dataset(object):
         return d
 
     @classmethod
-    def from_path(cls, dir_path=None, label_dict=config.LABEL_DICT, max_n=None):
+    def from_path(cls, dir_path=None, label_dict=None, max_n=None):
         """
         Create dataset from folder
         :param dir_path: (string) path to data folder
         :param max_n: (int) maximum number of datapoints
         :return: (Dataset) Dataset object
         """
+        if label_dict is None:
+            label_dict = config.LABEL_DICT
         assert dir_path, "Please provide a path to a folder of data"
         d = cls(label_dict)
         d.dir_path = dir_path
@@ -160,12 +170,14 @@ class Dataset(object):
         return d
 
     @staticmethod
-    def combine_datasets(datasets=[]):
+    def combine_datasets(datasets=None):
         """
         Combine datasets to get list of paths and labels
         :param datasets: [Dataset,] list of datasets
         :return:[string],[int] image paths, labels
         """
+        if datasets is None:
+            datasets = []
         input_paths = []
         targets = []
         for d in datasets:

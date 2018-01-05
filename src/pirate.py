@@ -64,7 +64,7 @@ class Pirate(object):
         :raises FileNotFoundError: Can't find hyperparameter text file in path
         """
         for dirpath, _, files in os.walk(config.MODEL_DIR):
-            if self.dna + '.pickle' in files:
+            if "{dna}.pickle".format(dna=self.dna) in files:
                 with open(os.path.join(dirpath, self.dna + '.pickle'), 'rb') as file:
                     data = pickle.load(file)
                 assert isinstance(data, dict), 'Pirate description is corrupted'
