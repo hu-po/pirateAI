@@ -5,6 +5,8 @@ PirateAI is a personal project that trains autonomous agents (pirates) in a simu
 This repo runs a training pipeline that alternates between a game (find the treasure) and model training 
 sessions (Keras + hyperopt).
 
+[YouTube Video](https://youtu.be/P3grJ5LHb8k)
+
 ## Environment
 
 ![alt text](docs/images/pirate.PNG "Get to the treasure first")
