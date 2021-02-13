@@ -1,3 +1,4 @@
+** NO LONGER MAINTAINED, USE AT YOUR OWN RISK **
 
 # PirateAI
 
